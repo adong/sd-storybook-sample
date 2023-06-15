@@ -1,0 +1,13 @@
+shared:
+    image: node:18
+
+jobs:
+    main:
+        requires: [~commit]
+        steps:
+            - generate-artifacts:  npm install && npm run build-storybook
+            - copy-to-artifacts-dir: cp -r ./storybook-static $SD_ARTIFACTS_DIR
+    something:
+        requires: [~pr]
+        steps:
+            - hello: echo hello
